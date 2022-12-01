@@ -9,6 +9,7 @@
  * }
  */
 class Solution {
+    /*
     public static ListNode addFrst(Stack<ListNode> st){
         ListNode head = st.pop();
         while(!st.isEmpty()){
@@ -18,6 +19,7 @@ class Solution {
         }
         return head;
     }
+    */
     public ListNode removeNodes(ListNode head) {
         /*
         ListNode dummy = new ListNode(-1);
@@ -53,7 +55,12 @@ class Solution {
             st.push(curr);
             curr = curr.next;
         }
-        ListNode ans = addFrst(st);
-        return ans;
+        //ListNode ans = addFrst(st);
+        //return ans;
+        while (st.size() > 1) {
+            ListNode n = st.pop();
+            st.peek().next = n;
+        }
+        return st.peek();
     }
 }
