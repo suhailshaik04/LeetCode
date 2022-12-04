@@ -1,21 +1,9 @@
 class Solution {
-    public static boolean BinarySearch(int[] arr, int key){
-        int low = 0 , high = arr.length-1;
-        while(low <= high){
-            int mid = low + (high-low)/2;
-            if(arr[mid]==key) return true;
-            else if(arr[mid]<key) low = mid+1;
-            else high = mid-1;
-        }
-        return false;
-    }
-    public int arithmeticTriplets(int[] nums, int diff) {
+   public int arithmeticTriplets(int[] arr, int key) {
         int count = 0;
-        for(int i=0;i<nums.length-2;i++){
-            boolean next = BinarySearch(nums,nums[i]+diff);
-            boolean nextnext = BinarySearch(nums,nums[i]+2*diff);
-            if(next && nextnext) count++;
-        }
+        Map<Integer,Integer> map = new HashMap<>();
+        for(int i=0;i<arr.length;i++) map.put(arr[i],i);
+        for(int k : arr) count += (map.containsKey(k+key) && map.containsKey(k+2*key)) ? 1 : 0;
         return count;
     }
 }
