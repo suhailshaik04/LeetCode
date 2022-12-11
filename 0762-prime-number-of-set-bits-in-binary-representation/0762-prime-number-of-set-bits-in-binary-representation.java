@@ -1,4 +1,5 @@
 class Solution {
+    /*
      public int countPrimeSetBits(int left, int right) {
         int count = 0;
         while (left <= right) {
@@ -24,5 +25,16 @@ class Solution {
             if (n % i == 0) return false;
         }
         return true;
+    }
+    */
+   public int countPrimeSetBits(int L, int R) {
+        int ans = 0;
+        for (int x = L; x <= R; ++x){
+            if (isPrime(Integer.bitCount(x)))ans++;
+        }
+        return ans;
+    }
+    public boolean isPrime(int x) {
+        return (x == 2 || x == 3 || x == 5 || x == 7 ||x == 11 || x == 13 || x == 17 || x == 19);
     }
 }
