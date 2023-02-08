@@ -1,19 +1,32 @@
 class Solution {
     public int jump(int[] nums) {
-        int jumpCount = 0;
-        int leftIdx = 0;
-        int rightIdx = 0;
-
-        while (rightIdx < nums.length - 1){
-            int farthestIdx = 0;
-            for (int i = leftIdx; i <= rightIdx; i++){
-                farthestIdx = Math.max(farthestIdx, i + nums[i]);
+        int max_i = 0;
+        int steps = 0;
+        int count = nums[0];
+        int i = 0;
+        if(nums.length == 1) return 0;
+        while(i < nums.length) {
+            if(count >= nums.length - (i + 1)) {
+                 steps++;
+                 break;
             }
-            leftIdx = rightIdx + 1;
-            rightIdx = farthestIdx;
-            jumpCount++;
+            max_i = max(nums, i+1, i + nums[i]+1);
+            i = max_i;
+            count = nums[i];
+            steps++;
         }
-
-        return jumpCount;
+        return steps;
+    }
+    public int max(int[] arr, int start, int end) {
+        int max = arr[start];
+        int index = 0;
+        while(start < end) {
+            if(max <= arr[start] + start) {
+                max = arr[start] + start;
+                index = start;
+            }
+            start++;
+        }
+        return index;
     }
 }
